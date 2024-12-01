@@ -1,0 +1,297 @@
+@model IEnumerable<StandCarros.Models.Car>
+
+@{
+ViewData["Title"] = "Início";
+}
+
+<div class="container" style="margin-top: 7%">
+    <div class="row custom-container collapse show" style=" justify-content: center" id="filterDesktop">
+        <form asp-action="Index" method="get" class="row g-3" id="filterForm" style="margin: 0">
+            <div class="col-md-4">
+                <label for="Marca" class="form-label">Marca</label>
+                <select class="form-select" id="Marca" name="Marca" onchange="submitForm()">
+                    <option value="">Todos</option>
+                    @foreach (var marca in ViewBag.Marcas as List<string>)
+                    {
+                        if (ViewBag.SelectedMarca == marca)
+                        {
+                            <option value="@marca" selected>@marca</option>
+                        }
+                        else
+                        {
+                            <option value="@marca">@marca</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="Combustivel" class="form-label">Combustível</label>
+                <select class="form-select" id="Combustivel" name="Combustivel" onchange="submitForm()">
+                    <option value="">Todos</option>
+                    @foreach (var combustivel in ViewBag.Combustiveis as List<string>)
+                    {
+                        if (ViewBag.SelectedCombustivel == combustivel)
+                        {
+                            <option value="@combustivel" selected>@combustivel</option>
+                        }
+                        else
+                        {
+                            <option value="@combustivel">@combustivel</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="Caixa" class="form-label">Caixa</label>
+                <select class="form-select" id="Caixa" name="Caixa" onchange="submitForm()">
+                    <option value="">Todos</option>
+                    @foreach (var caixa in ViewBag.Caixas as List<string>)
+                    {
+                        if (ViewBag.SelectedCaixa == caixa)
+                        {
+                            <option value="@caixa" selected>@caixa</option>
+                        }
+                        else
+                        {
+                            <option value="@caixa">@caixa</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="MinQuilometros" class="form-label">Quilómetros</label>
+                <input type="number" placeholder="de" class="form-control" id="MinQuilometros" name="MinQuilometros" value="@ViewBag.MinQuilometros" onchange="submitForm()"/>
+            </div>
+            <div class="col-md-2">
+                <label for="MaxQuilometros" class="form-label">Quilómetros</label>
+                <input type="number" placeholder="até" class="form-control" id="MaxQuilometros" name="MaxQuilometros" value="@ViewBag.MaxQuilometros" onchange="submitForm()"/>
+            </div>
+
+            <div class="col-md-2">
+                <label for="MinPrice" class="form-label">Preço</label>
+                <input type="number" placeholder="de" class="form-control" id="MinPrice" name="MinPrice" value="@ViewBag.MinPrice" onchange="submitForm()"/>
+            </div>
+            <div class="col-md-2">
+                <label for="MaxPrice" class="form-label">Preço</label>
+                <input type="number" placeholder="até" class="form-control" id="MaxPrice" name="MaxPrice" value="@ViewBag.MaxPrice" onchange="submitForm()"/>
+            </div>
+
+            <div class="col-md-4 align-self-end">
+                <a class="btn btn-secondary" href="@Url.Action("Index")">Repor Filtros</a>
+            </div>
+        </form>
+    </div>
+    <div class="container" style="margin-top: 7%" id ="filterMobile">
+        <!-- Filter Button -->
+        <button class="btn btn-light" type="button" id="toggleFilters">
+            <img src="~/icons/filters_icon.png" alt="filters_icon" class="selected-icon"/>
+        </button>
+
+        <!-- Collapsible Filter Options -->
+        <div class="filter-wrapper">
+            <div class="row custom-container collapse" id="filterContainer">
+                <form asp-action="Index" method="get" class="row g-3 mt-1" id="filterFormMobile">
+                    <h3 style="text-align: center; margin-top: 0">Aplicar Filtros</h3>
+                    <div class="col-md-4 mt-0">
+                        <label for="Marca" class="form-label">Marca</label>
+                        <select class="form-select" id="Marca" name="Marca">
+                            <option value="">Todos</option>
+                            @foreach (var marca in ViewBag.Marcas as List<string>)
+                            {
+                                if (ViewBag.SelectedMarca == marca)
+                                {
+                                    <option value="@marca" selected>@marca</option>
+                                }
+                                else
+                                {
+                                    <option value="@marca">@marca</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="Combustivel" class="form-label">Combustível</label>
+                        <select class="form-select" id="Combustivel" name="Combustivel">
+                            <option value="">Todos</option>
+                            @foreach (var combustivel in ViewBag.Combustiveis as List<string>)
+                            {
+                                if (ViewBag.SelectedCombustivel == combustivel)
+                                {
+                                    <option value="@combustivel" selected>@combustivel</option>
+                                }
+                                else
+                                {
+                                    <option value="@combustivel">@combustivel</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="Caixa" class="form-label">Caixa</label>
+                        <select class="form-select" id="Caixa" name="Caixa">
+                            <option value="">Todos</option>
+                            @foreach (var caixa in ViewBag.Caixas as List<string>)
+                            {
+                                if (ViewBag.SelectedCaixa == caixa)
+                                {
+                                    <option value="@caixa" selected>@caixa</option>
+                                }
+                                else
+                                {
+                                    <option value="@caixa">@caixa</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="MinQuilometros" class="form-label">Quilómetros</label>
+                        <div class="d-flex gap-2">
+                            <input type="number" placeholder="de" class="form-control" id="MinQuilometros" name="MinQuilometros" value="@ViewBag.MinQuilometros"/>
+                            <input type="number" placeholder="até" class="form-control" id="MaxQuilometros" name="MaxQuilometros" value="@ViewBag.MaxQuilometros"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="MinPrice" class="form-label">Preço</label>
+                        <div class="d-flex gap-2">
+                            <input type="number" placeholder="de" class="form-control" id="MinPrice" name="MinPrice" value="@ViewBag.MinPrice"/>
+                            <input type="number" placeholder="até" class="form-control" id="MaxPrice" name="MaxPrice" value="@ViewBag.MaxPrice"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 d-flex justify-content-center pb-2">
+                        <a class="btn btn-secondary" href="@Url.Action("Index")">Repor Filtros</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <a class="container-link" asp-action="Details" asp-route-id="@item.Id" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <div class="card-body">
+                            @if (item.Photos.Any())
+                            {
+                                <div id="carousel-@item.Id" class="carousel slide custom-carousel" data-bs-ride="carousel" style="height: 350px;">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        @for (int i = 0; i < item.Photos.Count(); i++)
+                                        {
+                                            <li data-bs-target="#carousel-@item.Id" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                        }
+                                    </ol>
+
+                                    <!-- Carousel Items -->
+                                    <div class="carousel-inner" style="border-radius: 26px 0 0 0">
+                                        @for (int i = 0; i < item.Photos.Count(); i++)
+                                        {
+                                            var photo = item.Photos.ElementAt(i);
+                                            <div class="carousel-item @(i == 0 ? "active" : "")" style="height: 100%">
+                                                <img src="data:image/@photo.FileExtension;base64,@Convert.ToBase64String(photo.Bytes)" alt="@photo.Description"/>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <!-- Controls -->
+                                    @if (item.Photos.Count > 1)
+                                    {
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-@item.Id" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-@item.Id" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">Sem fotos para mostrar</p>
+                            }
+                            <h5 class="card-name"> @item.Name</h5>
+                            <p class="card-text text-center">
+                                @item.Combustível - @item.Quilometros.ToString("N0") Km - @item.Caixa - @item.DataRegisto.Year<br/>
+                            </p>
+                        </div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="card-footer">
+                                <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                            </div>
+                        }
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+    function submitForm() {
+        document.getElementById('filterForm').submit();
+    }
+    function submitFormMobile() {
+        document.getElementById('filterFormMobile').submit();
+    }
+
+    function resetFitlers() {
+        // clear fileds and submit form clean
+        submitFormMobile()
+    }
+    let filterDesktop = document.getElementById('filterDesktop');
+
+    filterDesktop.addEventListener('shown.bs.collapse', function () {
+        toggleButton.textContent = 'Ocultar Filtros';
+        toggleButton.classList.remove('btn-outline-dark');
+        toggleButton.classList.add('btn-dark');
+    });
+
+    filterDesktop.addEventListener('hidden.bs.collapse', function () {
+        toggleButton.textContent = 'Mostrar Filtros';
+        toggleButton.classList.add('btn-outline-dark');
+        toggleButton.classList.remove('btn-dark');
+    });
+
+    let filterContainer = document.getElementById('filterContainer');
+    let toggleButton = document.getElementById('toggleFilters');
+
+    filterContainer.addEventListener('shown.bs.collapse', function () {
+        toggleButton.classList.remove('btn-outline-dark');
+        toggleButton.classList.add('btn-dark');
+    });
+
+    filterContainer.addEventListener('hidden.bs.collapse', function () {
+        toggleButton.classList.add('btn-outline-dark');
+        toggleButton.classList.remove('btn-dark');
+    });
+    const filterWrapper = document.querySelector('.filter-wrapper');
+    
+    toggleButton.addEventListener('click', () => {
+        if (filterWrapper.classList.contains('open')) {
+            // IF HAS FILTERS submit form
+            submitFormMobile()
+            // Close the filter
+            filterWrapper.classList.remove('open');
+            toggleButton.innerHTML = '<img src="/icons/filters_icon.png" alt="filters_icon" class="selected-icon"/>';
+        } else {
+            // Open the filter
+            filterWrapper.classList.add('open');
+            toggleButton.innerHTML = '<img src="/icons/search_filter_icon.png" alt="save_icon" class="selected-icon"/>';
+        }
+    });
+</script>
+}

@@ -1,0 +1,288 @@
+@model StandCarros.Models.Car
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h1>Editar</h1>
+<hr />
+<div class="row">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div class="col-md-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <!-- Form layout with labels and inputs aligned -->
+                <div class="row mb-3">
+                    <label asp-for="Name" class="col-sm-4 col-form-label text-end">Nome:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Preco" class="col-sm-4 col-form-label text-end">Preço:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Preco" class="form-control" />
+                        <span asp-validation-for="Preco" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Marca" class="col-sm-4 col-form-label text-end">Marca:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Marca" class="form-control" />
+                        <span asp-validation-for="Marca" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Modelo" class="col-sm-4 col-form-label text-end">Modelo:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Modelo" class="form-control" />
+                        <span asp-validation-for="Modelo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Combustível" class="col-sm-4 col-form-label text-end">Combustível:</label>
+                    <div class="col-sm-8">
+                        <select asp-for="Combustível" class="form-select" asp-items="ViewBag.Combustiveis"></select>
+                        <span asp-validation-for="Combustível" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="DataRegisto" class="col-sm-4 col-form-label text-end">Data Registo:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="DataRegisto" class="form-control" />
+                        <span asp-validation-for="DataRegisto" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Quilometros" class="col-sm-4 col-form-label text-end">Quilómetros:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Quilometros" class="form-control" />
+                        <span asp-validation-for="Quilometros" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Cilindrada" class="col-sm-4 col-form-label text-end">Cilindrada:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Cilindrada" class="form-control" />
+                        <span asp-validation-for="Cilindrada" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Potencia" class="col-sm-4 col-form-label text-end">Potência:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Potencia" class="form-control" />
+                        <span asp-validation-for="Potencia" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Cor" class="col-sm-4 col-form-label text-end">Cor:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Cor" class="form-control" />
+                        <span asp-validation-for="Cor" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Caixa" class="col-sm-4 col-form-label text-end">Caixa:</label>
+                    <div class="col-sm-8">
+                        <select asp-for="Caixa" class="form-select" asp-items="ViewBag.Caixas"></select>
+                        <span asp-validation-for="Caixa" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="NumMudancas" class="col-sm-4 col-form-label text-end">N.º Mudanças:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="NumMudancas" class="form-control" />
+                        <span asp-validation-for="NumMudancas" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="NumPortas" class="col-sm-4 col-form-label text-end">N.º Portas:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="NumPortas" class="form-control" />
+                        <span asp-validation-for="NumPortas" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Tracao" class="col-sm-4 col-form-label text-end">Tração:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Tracao" class="form-control" />
+                        <span asp-validation-for="Tracao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Descricao" class="col-sm-4 col-form-label text-end">Descrição:</label>
+                    <div class="col-sm-8">
+                        <textarea asp-for="Descricao" class="form-control" rows="5"></textarea>
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3" form-group>
+                    <label asp-for="Files" class="col-sm-4 col-form-label text-end">Escolha fotos para adicionar:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="Files" id="fileInput" class="form-control" type="file" multiple onchange="handleFileSelection(event)" />
+                        <span asp-validation-for="Files" class="text-danger"></span>
+                    </div>
+                </div>
+        </div>
+
+        <!-- Preview Section for Selected Photos -->
+        <div class="row mb-3 d-none" id="addPhotosContainer">
+            <label class="col-sm-4 col-form-label"><b>Fotos a adicionar:</b></label>
+            <div class="col-sm-8" id="filePreviewContainer" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <!-- Dynamic preview images will be appended here -->
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 2%">
+            <label asp-for="Files" class="control-label"><b>Selecione fotos para remover:</b></label>
+            <div class="d-flex flex-wrap gap-3" style="margin: 1% 0" id="photoContainer">
+                @if (Model.Photos.Any())
+                {
+                foreach (var photo in Model.Photos)
+                {
+                <div class="photo-card position-relative"
+                     onclick="togglePhotoRemoval(this, @photo.Id)"
+                     data-photo-id="@photo.Id"
+                     style="cursor: pointer;">
+                    <img src="data:image/@photo.FileExtension;base64,@Convert.ToBase64String(photo.Bytes)"
+                         alt="@photo.Description"
+                         class="img-thumbnail"
+                         style="width: 150px; height: auto;" />
+                    <div class="overlay d-none position-absolute top-0 start-0 w-100 h-100 bg-opacity-50 d-flex align-items-center justify-content-center text-white">
+                        <img src="~/icons/trash_icon_2.png" alt="delete_icon" class="selected-icon" />
+                    </div>
+                </div>
+                }
+                }
+                else
+                {
+                <p>Sem fotos para mostrar</p>
+                }
+            </div>
+
+            <!-- Hidden input to store photo IDs to remove -->
+            <input type="hidden" name="removePhotos" id="removePhotos" value="" />
+
+        </div>
+
+        <div class="row mb-3 form-group">
+            <div class="col-sm-8">
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    let selectedFiles = [];
+    function handleFileSelection(event) {
+        const files = event.target.files;
+        const filePreviewContainer = document.getElementById('filePreviewContainer');
+        const container = document.getElementById('addPhotosContainer');
+        if (container.classList.contains("d-none")) {
+            container.classList.remove("d-none");
+        }
+        
+        // Loop through each selected file
+        Array.from(files).forEach(file => {
+            selectedFiles.push(file);
+            // Create a file reader to preview the image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageUrl = e.target.result;
+
+                // Create an image preview element
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = file.name;
+                img.classList.add('img-thumbnail');
+                img.style.width = '150px';
+                img.style.height = 'auto';
+                img.style.cursor = 'pointer';
+
+                // Create a container for each image preview
+                const previewDiv = document.createElement('div');
+                previewDiv.classList.add('photo-preview');
+                previewDiv.style.position = 'relative';
+
+                // Add an icon to remove the image (optional)
+                const removeIcon = document.createElement('button');
+                removeIcon.innerHTML = '&times;';
+                removeIcon.classList.add('btn', 'btn-danger', 'btn-sm');
+                removeIcon.style.position = 'absolute';
+                removeIcon.style.top = '0';
+                removeIcon.style.right = '0';
+                removeIcon.style.width = '20px';
+                removeIcon.style.height = '20px';
+                removeIcon.style.borderRadius = '50%';
+                removeIcon.style.lineHeight = '13px';
+                removeIcon.style.textAlign = 'center';
+                removeIcon.style.padding = '0';
+                removeIcon.style.fontSize = '16px';
+                removeIcon.style.cursor = 'pointer';
+                removeIcon.addEventListener('click', () => removeFilePreview(previewDiv, file));
+
+                previewDiv.appendChild(img);
+                previewDiv.appendChild(removeIcon);
+                filePreviewContainer.appendChild(previewDiv);
+            };
+
+            // Read the image file as a Data URL
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function removeFilePreview(previewDiv, file) {
+        previewDiv.remove();
+
+        selectedFiles = selectedFiles.filter(f => f !== file);
+        
+        const container = document.getElementById('addPhotosContainer');
+        if (selectedFiles.length === 0 && !container.classList.contains("d-none")) {
+            container.classList.add("d-none");
+        }
+        
+        // Update the hidden input with the new list of files
+        updateHiddenInput();
+    }
+
+    function updateHiddenInput() {
+        const dataTransfer = new DataTransfer();
+
+        // Append all remaining files to the DataTransfer object
+        selectedFiles.forEach(file => dataTransfer.items.add(file));
+
+        // Update the file input's files property
+        const fileInput = document.getElementById('fileInput');
+        fileInput.files = dataTransfer.files;
+    }
+    // Array to hold photos selected for removal
+    const removedPhotoIds = [];
+    // Array to hold newly added photos
+    const newPhotos = [];
+
+    function togglePhotoRemoval(card, photoId) {
+        const overlay = card.querySelector('.overlay');
+        overlay.classList.toggle('d-none');
+
+        // Toggle removal state
+        if (!removedPhotoIds.includes(photoId)) {
+            removedPhotoIds.push(photoId); // Add to removal list
+        } else {
+            const index = removedPhotoIds.indexOf(photoId);
+            if (index > -1) {
+                removedPhotoIds.splice(index, 1); // Remove from list
+            }
+        }
+
+        // Update the hidden input value with comma-separated list of IDs to remove
+        document.getElementById('removePhotos').value = removedPhotoIds.join(',');
+    }
+
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

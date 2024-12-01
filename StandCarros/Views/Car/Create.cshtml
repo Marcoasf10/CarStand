@@ -1,0 +1,211 @@
+@model StandCarros.Models.Car
+
+@{
+    ViewData["Title"] = "Adicionar automóvel";
+}
+
+<a asp-action="Index" class="btn btn-outline-secondary" style="margin: 1%">Voltar</a>
+<h1>Adicionar automóvel</h1>
+<hr />
+
+<div class="container custom-shadow-container" style="border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.2); padding: 20px;">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="row justify-content-around">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Marca" class="control-label"></label>
+                    <input asp-for="Marca" class="form-control" />
+                    <span asp-validation-for="Marca" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Modelo" class="control-label"></label>
+                    <input asp-for="Modelo" class="form-control" />
+                    <span asp-validation-for="Modelo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Preco" class="control-label"></label>
+                    <input asp-for="Preco" class="form-control" />
+                    <span asp-validation-for="Preco" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Combustível" class="control-label"></label>
+                    <select asp-for="Combustível" class="form-select" asp-items="ViewBag.Combustiveis"></select>
+                    <span asp-validation-for="Combustível" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataRegisto" class="control-label"></label>
+                    <input asp-for="DataRegisto" class="form-control" type="month" />
+                    <span asp-validation-for="DataRegisto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quilometros" class="control-label"></label>
+                    <input asp-for="Quilometros" class="form-control" />
+                    <span asp-validation-for="Quilometros" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Cilindrada" class="control-label"></label>
+                    <input asp-for="Cilindrada" class="form-control" />
+                    <span asp-validation-for="Cilindrada" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Potencia" class="control-label"></label>
+                    <input asp-for="Potencia" class="form-control" />
+                    <span asp-validation-for="Potencia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cor" class="control-label"></label>
+                    <input asp-for="Cor" class="form-control" />
+                    <span asp-validation-for="Cor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Caixa" class="control-label"></label>
+                    <select asp-for="Caixa" class="form-select" asp-items="ViewBag.Caixas"></select>
+                    <span asp-validation-for="Caixa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumMudancas" class="control-label"></label>
+                    <input asp-for="NumMudancas" class="form-control" />
+                    <span asp-validation-for="NumMudancas" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumPortas" class="control-label"></label>
+                    <input asp-for="NumPortas" class="form-control" />
+                    <span asp-validation-for="NumPortas" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tracao" class="control-label"></label>
+                    <select asp-for="Tracao" class="form-select" asp-items="ViewBag.Tracao"></select>
+                    <span asp-validation-for="Tracao" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full width row -->
+        <div class="row justify-content-center">
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <textarea asp-for="Descricao" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="control-label">Fotos</label>
+                    <input asp-for="Files" id="fileInput" class="form-control" type="file" multiple onchange="handleFileSelection(event)"/>
+                    <span asp-validation-for="Files" class="text-danger"></span>
+                </div>
+                <!-- Preview Section for Selected Photos -->
+                <div class="row mb-3 d-none mt-4" id="addPhotosContainer">
+                    <label class="col-sm-4 col-form-label" style="text-align: inherit"><b>Fotos a adicionar:</b></label>
+                    <div class="col-sm-8" id="filePreviewContainer" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <!-- Dynamic preview images will be appended here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-3" style="margin-left: 8%">
+            <a asp-action="Index" class="btn btn-outline-secondary" style="margin: 1%">Voltar</a>
+            <input type="submit" value="Adicionar" class="btn btn-primary"/>
+        </div>
+    </form>
+</div>
+
+<script>
+    let selectedFiles = [];
+    function handleFileSelection(event) {
+        const files = event.target.files;
+        const filePreviewContainer = document.getElementById('filePreviewContainer');
+        const container = document.getElementById('addPhotosContainer');
+        if (container.classList.contains("d-none")) {
+            container.classList.remove("d-none");
+        }
+
+        // Loop through each selected file
+        Array.from(files).forEach(file => {
+            selectedFiles.push(file);
+            // Create a file reader to preview the image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageUrl = e.target.result;
+
+                // Create an image preview element
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = file.name;
+                img.classList.add('img-thumbnail');
+                img.style.width = '150px';
+                img.style.height = 'auto';
+                img.style.cursor = 'pointer';
+
+                // Create a container for each image preview
+                const previewDiv = document.createElement('div');
+                previewDiv.classList.add('photo-preview');
+                previewDiv.style.position = 'relative';
+
+                // Add an icon to remove the image (optional)
+                const removeIcon = document.createElement('button');
+                removeIcon.innerHTML = '&times;';
+                removeIcon.classList.add('btn', 'btn-danger', 'btn-sm');
+                removeIcon.style.position = 'absolute';
+                removeIcon.style.top = '0';
+                removeIcon.style.right = '0';
+                removeIcon.style.width = '20px';
+                removeIcon.style.height = '20px';
+                removeIcon.style.borderRadius = '50%';
+                removeIcon.style.lineHeight = '13px';
+                removeIcon.style.textAlign = 'center';
+                removeIcon.style.padding = '0';
+                removeIcon.style.fontSize = '16px';
+                removeIcon.style.cursor = 'pointer';
+                removeIcon.addEventListener('click', () => removeFilePreview(previewDiv, file));
+
+                previewDiv.appendChild(img);
+                previewDiv.appendChild(removeIcon);
+                filePreviewContainer.appendChild(previewDiv);
+            };
+
+            // Read the image file as a Data URL
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function removeFilePreview(previewDiv, file) {
+        previewDiv.remove();
+
+        selectedFiles = selectedFiles.filter(f => f !== file);
+
+        const container = document.getElementById('addPhotosContainer');
+        if (selectedFiles.length === 0 && !container.classList.contains("d-none")) {
+            container.classList.add("d-none");
+        }
+
+        // Update the hidden input with the new list of files
+        updateHiddenInput();
+    }
+
+    function updateHiddenInput() {
+        const dataTransfer = new DataTransfer();
+
+        // Append all remaining files to the DataTransfer object
+        selectedFiles.forEach(file => dataTransfer.items.add(file));
+
+        // Update the file input's files property
+        const fileInput = document.getElementById('fileInput');
+        fileInput.files = dataTransfer.files;
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

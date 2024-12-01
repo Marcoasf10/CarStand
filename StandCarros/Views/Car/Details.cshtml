@@ -1,0 +1,235 @@
+
+@model StandCarros.Models.Car
+
+@{
+ViewData["Title"] = "Details";
+}
+<div>
+    <a asp-action="Index" class="btn btn-outline-secondary" style="margin: 1%">Voltar</a>
+    @if (User.IsInRole("Admin"))
+    {
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id">Editar</a>
+    }
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+    <hr />
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-8 position-relative">
+            <!-- Background overlay for fullscreen mode -->
+            <div id="fullscreen-overlay" class="fullscreen-overlay" style="display: none;"></div>
+
+            @if (Model.Photos.Any())
+            {
+            <div id="carousel-@Model.Id" class="carousel slide custom-carousel details-carousel" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @for (var i = 0; i < Model.Photos.Count; i++)
+                    {
+                    var photo = Model.Photos[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="data:image/@photo.FileExtension;base64,@Convert.ToBase64String(photo.Bytes)" alt="@photo.Description" style="object-fit: cover;">
+                    </div>
+                    }
+                </div>
+
+                <!-- Counter for Mobile -->
+                <div class="carousel-slide-counter">
+                    <span id="current-slide">1</span> / @Model.Photos.Count
+                </div>
+
+                @if (Model.Photos.Count > 1)
+                {
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-@Model.Id" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-@Model.Id" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                }
+                <div id="carousel-indicators" class="carousel-indicators" style="bottom: 80px;">
+                    @for (int i = 0; i < Model.Photos.Count(); i++)
+                    {
+                    var photo = Model.Photos[i];
+                    <button type="button" data-bs-target="#carousel-@Model.Id" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "") thumbnail">
+                        <div class="indicator-img-wrapper">
+                            <img src="data:image/@photo.FileExtension;base64,@Convert.ToBase64String(photo.Bytes)" alt="@photo.Description" class="indicator-img">
+                        </div>
+                    </button>
+                    }
+                </div>
+            </div>
+            <div id="fullscreen-carousel-@Model.Id" class="carousel slide custom-carousel fullscreen-carousel" data-bs-ride="carousel" style="display: none">
+                <div class="carousel-inner">
+                    @for (var i = 0; i < Model.Photos.Count; i++)
+                    {
+                    var photo = Model.Photos[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")" onclick="openFullscreen()">
+                        <img src="data:image/@photo.FileExtension;base64,@Convert.ToBase64String(photo.Bytes)" alt="@photo.Description" style="object-fit: cover;">
+                    </div>
+                    }
+                </div>
+
+                <button id="close-btn" class="btn btn-dark" onclick="closeFullscreen()" style="display: none;">
+                    Fechar
+                </button>
+
+                @if (Model.Photos.Count > 1)
+                {
+                <button class="carousel-control-prev" type="button" data-bs-target="#fullscreen-carousel-@Model.Id" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#fullscreen-carousel-@Model.Id" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                }
+
+                <div id="fullscreen-carousel-indicators" class="carousel-indicators" style="bottom: 80px;">
+                    @for (int i = 0; i < Model.Photos.Count(); i++)
+                    {
+                    var photo = Model.Photos[i];
+                    <button type="button" data-bs-target="#fullscreen-carousel-@Model.Id" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "") thumbnail">
+                        <div class="indicator-img-wrapper">
+                            <img src="data:image/@photo.FileExtension;base64,@Convert.ToBase64String(photo.Bytes)" alt="@photo.Description" class="indicator-img">
+                        </div>
+                    </button>
+                    }
+                </div>
+            </div>
+            }
+            else
+            {
+            <p>No photos available.</p>
+            }
+        </div>
+
+        <div class="col-12 col-md-4 d-flex flex-column justify-content-between">
+            <div class="custom-container text-center order-md-2" style="font-size: 24px; padding: 20px; background-color: #f8f9fa; border-radius: 12px; margin: 5% 0">
+                <strong>€ @Model.Preco</strong>
+            </div>
+
+            <div class="custom-container order-md-1">
+                <dl class="row" style="margin-bottom: 0">
+                    <div class="col-12">
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Marca):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Marca)</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Modelo):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Modelo)</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Combustível):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Combustível)</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.DataRegisto):</dt>
+                            <dd class="col-sm-6">@Model.DataRegisto.ToString("MMMM") de @Model.DataRegisto.Year</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Quilometros):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Quilometros)</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Cilindrada):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Cilindrada) cm3</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Potencia):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Potencia) cv</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Cor):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Cor)</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Caixa):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Caixa)</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.NumMudancas):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.NumMudancas)</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.NumPortas):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.NumPortas)</dd>
+                        </div>
+                        <div class="row mb-1">
+                            <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Tracao):</dt>
+                            <dd class="col-sm-6">@Html.DisplayFor(model => model.Tracao)</dd>
+                        </div>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description Section -->
+    <div class="row custom-container mt-4">
+        <h3>@Html.DisplayNameFor(model => model.Descricao)</h3>
+        <p>@Html.DisplayFor(model => model.Descricao)</p>
+    </div>
+</div>
+
+<style>
+    .fullscreen-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1049;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const carouselElement = document.getElementById('carousel-@Model.Id');
+        const currentSlideElement = document.getElementById('current-slide');
+        const totalSlides = @Model.Photos.Count;
+
+        // Initialize Bootstrap carousel
+        const bsCarousel = new bootstrap.Carousel(carouselElement);
+
+        // Update slide counter when the slide changes
+        carouselElement.addEventListener('slid.bs.carousel', function (event) {
+            const currentSlideIndex = event.to + 1; // Carousel indices are 0-based
+            currentSlideElement.textContent = currentSlideIndex;
+        });
+
+        // Initialize the counter
+        currentSlideElement.textContent = 1;
+    });
+    
+    function openFullscreen() {
+        var fullscreenCarousel = document.getElementById('fullscreen-carousel-@Model.Id');
+        var overlay = document.getElementById('fullscreen-overlay');
+
+        // Show overlay and fullscreen carousel
+        overlay.style.display = 'block';
+        fullscreenCarousel.style.display = 'block';
+
+        // Show close button
+        document.getElementById('close-btn').style.display = 'block';
+    }
+
+    function closeFullscreen() {
+        var fullscreenCarousel = document.getElementById('fullscreen-carousel-@Model.Id');
+        var overlay = document.getElementById('fullscreen-overlay');
+
+        // Show overlay and fullscreen carousel
+        overlay.style.display = 'none';
+        fullscreenCarousel.style.display = 'none';
+
+        // Show close button
+        document.getElementById('close-btn').style.display = 'none';
+    }
+
+</script>

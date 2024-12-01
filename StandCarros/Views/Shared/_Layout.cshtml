@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Carlos Massano</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>  
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+</head>
+<body>
+<header>
+    <nav id="navbar" class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow mb-3 fixed-top" style="transition: transform 0.3s ease-in-out;">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Car" asp-action="Index">
+                <img src="~/icons/Carlos_Massano_icon.png" alt="Brand Logo" style="height: 35px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2024 - Carlos Massano - <a asp-area="" asp-controller="Car">Início</a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script>
+    var lastScrollTop = 0;
+    var navbar = document.getElementById("navbar");
+    
+    window.onload = function() {
+        var navbarHeight = document.getElementById("navbar").offsetHeight;
+        document.querySelector(".container").style.marginTop = navbarHeight+10 + "px";
+    };
+
+    // Recalculate on window resize (optional)
+    window.onresize = function() {
+        var navbarHeight = document.getElementById("navbar").offsetHeight;
+        document.querySelector(".container").style.marginTop = navbarHeight + "px";
+    };
+
+    window.addEventListener("scroll", function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down - hide the navbar
+            navbar.classList.add("navbar-hidden");
+        } else {
+            // Scrolling up - show the navbar
+            navbar.classList.remove("navbar-hidden");
+        }
+
+        lastScrollTop = scrollTop;
+    });
+    
+</script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -253,14 +253,16 @@ ViewData["Title"] = "Início";
     function submitForm() {
         document.getElementById('filterForm').submit();
     }
+    const filterFormMobile = document.getElementById('filterFormMobile');
     function submitFormMobile() {
-        document.getElementById('filterFormMobile').submit();
+        filterFormMobile.submit();
     }
 
     function resetFitlers() {
         // clear fileds and submit form clean
         submitFormMobile()
     }
+    
     let filterDesktop = document.getElementById('filterDesktop');
 
     filterDesktop.addEventListener('shown.bs.collapse', function () {
@@ -288,19 +290,34 @@ ViewData["Title"] = "Início";
         toggleButton.classList.remove('btn-dark');
     });
     const filterWrapper = document.querySelector('.filter-wrapper');
+
+    let initialFormData = null;
+
+    // Function to serialize form data
+    function getFormData(form) {
+        const formData = new FormData(form);
+        return Array.from(formData.entries()).reduce((acc, [key, value]) => {
+            acc[key] = value;
+            return acc;
+        }, {});
+    }
     
     toggleButton.addEventListener('click', () => {
         if (filterWrapper.classList.contains('open')) {
             // IF HAS FILTERS submit form
-            submitFormMobile()
-            // Close the filter
-            filterWrapper.classList.remove('open');
+            const currentFormData = getFormData(filterFormMobile);
+
+            // Compare with initial form data
+            if (JSON.stringify(initialFormData) !== JSON.stringify(currentFormData)) {
+                filterFormMobile.submit();
+            }
             toggleButton.innerHTML = '<img src="/icons/filters_icon.png" alt="filters_icon" class="selected-icon"/>';
         } else {
             // Open the filter
-            filterWrapper.classList.add('open');
+            initialFormData = getFormData(filterFormMobile);
             toggleButton.innerHTML = '<img src="/icons/search_filter_icon.png" alt="save_icon" class="selected-icon"/>';
         }
+        filterWrapper.classList.toggle('open');
     });
 </script>
 }

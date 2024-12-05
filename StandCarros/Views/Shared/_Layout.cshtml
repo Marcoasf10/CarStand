@@ -56,7 +56,11 @@
     window.addEventListener("scroll", function() {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        if (scrollTop > lastScrollTop) {
+
+        if (scrollTop === 0) {
+            // If at the top of the page, ensure the navbar is visible
+            navbar.classList.remove("navbar-hidden");
+        } else if (scrollTop > lastScrollTop) {
             // Scrolling down - hide the navbar
             navbar.classList.add("navbar-hidden");
         } else {

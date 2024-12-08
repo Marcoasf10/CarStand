@@ -65,8 +65,7 @@ ViewData["Title"] = "Início";
                 <label for="MinQuilometros" class="form-label">Quilómetros</label>
                 <input type="number" placeholder="de" class="form-control" id="MinQuilometros" name="MinQuilometros" value="@ViewBag.MinQuilometros" onchange="submitForm()"/>
             </div>
-            <div class="col-md-2">
-                <label for="MaxQuilometros" class="form-label">Quilómetros</label>
+            <div class="col-md-2 d-flex align-items-end">
                 <input type="number" placeholder="até" class="form-control" id="MaxQuilometros" name="MaxQuilometros" value="@ViewBag.MaxQuilometros" onchange="submitForm()"/>
             </div>
 
@@ -74,8 +73,7 @@ ViewData["Title"] = "Início";
                 <label for="MinPrice" class="form-label">Preço</label>
                 <input type="number" placeholder="de" class="form-control" id="MinPrice" name="MinPrice" value="@ViewBag.MinPrice" onchange="submitForm()"/>
             </div>
-            <div class="col-md-2">
-                <label for="MaxPrice" class="form-label">Preço</label>
+            <div class="col-md-2 d-flex align-items-end">
                 <input type="number" placeholder="até" class="form-control" id="MaxPrice" name="MaxPrice" value="@ViewBag.MaxPrice" onchange="submitForm()"/>
             </div>
 
@@ -263,32 +261,6 @@ ViewData["Title"] = "Início";
         submitFormMobile()
     }
     
-    let filterDesktop = document.getElementById('filterDesktop');
-
-    filterDesktop.addEventListener('shown.bs.collapse', function () {
-        toggleButton.textContent = 'Ocultar Filtros';
-        toggleButton.classList.remove('btn-outline-dark');
-        toggleButton.classList.add('btn-dark');
-    });
-
-    filterDesktop.addEventListener('hidden.bs.collapse', function () {
-        toggleButton.textContent = 'Mostrar Filtros';
-        toggleButton.classList.add('btn-outline-dark');
-        toggleButton.classList.remove('btn-dark');
-    });
-
-    let filterContainer = document.getElementById('filterContainer');
-    let toggleButton = document.getElementById('toggleFilters');
-
-    filterContainer.addEventListener('shown.bs.collapse', function () {
-        toggleButton.classList.remove('btn-outline-dark');
-        toggleButton.classList.add('btn-dark');
-    });
-
-    filterContainer.addEventListener('hidden.bs.collapse', function () {
-        toggleButton.classList.add('btn-outline-dark');
-        toggleButton.classList.remove('btn-dark');
-    });
     const filterWrapper = document.querySelector('.filter-wrapper');
 
     let initialFormData = null;
@@ -302,6 +274,7 @@ ViewData["Title"] = "Início";
         }, {});
     }
     
+    let toggleButton = document.getElementById('toggleFilters');
     toggleButton.addEventListener('click', () => {
         if (filterWrapper.classList.contains('open')) {
             // IF HAS FILTERS submit form

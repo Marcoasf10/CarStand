@@ -1207,3 +1207,4 @@
 /Users/marcoferreira/RiderProjects/StandCarros/bin/Release/net8.0/net8.0/refs/System.Xml.XPath.dll
 /Users/marcoferreira/RiderProjects/StandCarros/bin/Release/net8.0/net8.0/refs/System.Xml.XPath.XDocument.dll
 /Users/marcoferreira/RiderProjects/StandCarros/bin/Release/net8.0/net8.0/refs/WindowsBase.dll
+/Users/marcoferreira/RiderProjects/StandCarros/StandCarros/obj/Release/net8.0/StandCarros.sourcelink.json

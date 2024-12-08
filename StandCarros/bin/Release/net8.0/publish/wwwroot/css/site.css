@@ -76,8 +76,10 @@ html {
   padding: 3%;
 }
 
+
 .carousel-indicators button.thumbnail {
   width: 100px;
+  margin: 0 5px;
 }
 
 .details-carousel{
@@ -106,6 +108,7 @@ html {
   height: 80px; /* Set the height you prefer */
   overflow: hidden; /* Hide overflow (crop the excess part of the image) */
   display: flex;
+  border-radius: 4px;
 }
 
 .indicator-img {
@@ -150,13 +153,12 @@ html {
 }
 .fullscreen-carousel {
   position: fixed;
-  top: 50px;
+  top: 50%;
   left: 50%;
   width: 75%;
   height: 75%;
   z-index: 1050;
-  border-radius: 16px;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%);
 }
 
 .photo-card {
@@ -199,12 +201,21 @@ html {
 }
 
 #filterDesktop{
-  display: block;
   margin-bottom: 3%
 }
 
 #filterMobile{
   display: none;
+}
+
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1049;
 }
 
 @media (max-width: 425px) {
@@ -215,7 +226,11 @@ html {
     height: 400px;
   }
   .carousel-indicators {
-    display: none;
+    display: none !important;
+  }
+  
+  #fullscreen-carousel-indicators{
+    //Bottom
   }
   
   #filterDesktop{
@@ -244,11 +259,6 @@ html {
     transition: transform 0.3s ease-in-out;
   }
 
-  #toggleFilters .icon {
-    font-size: 1.5rem;
-    color: white;
-  }
-
   .filter-wrapper {
     position: fixed;
     bottom: 50px;
@@ -268,8 +278,8 @@ html {
     height: calc(100vh - 155px);
     bottom: 85px; /* Align to button */
     right: 5%;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 1px solid #c1c1c1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.2);
     padding-bottom: 0;
   }
 
@@ -283,5 +293,18 @@ html {
   
   .selected-icon{
     padding: 20% 5%;
+  }
+  
+  .col-sm-4.col-form-label{
+    text-align: inherit !important;
+  }
+  
+  .fullscreen-carousel {
+    width: 95%;
+    height: 70%;
+  }
+
+  .fullscreen-carousel.custom-carousel .carousel-inner{
+    border-radius: 0 !important;
   }
 }

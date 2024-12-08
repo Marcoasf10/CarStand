@@ -1473,3 +1473,4 @@
 /Users/marcoferreira/RiderProjects/StandCarros/StandCarros/bin/Release/net8.0/net8.0/runtimes/win/lib/net6.0/System.Runtime.Caching.dll
 /Users/marcoferreira/RiderProjects/StandCarros/StandCarros/bin/Release/net8.0/net8.0/runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll
 /Users/marcoferreira/RiderProjects/StandCarros/StandCarros/bin/Release/net8.0/net8.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll
+/Users/marcoferreira/RiderProjects/StandCarros/StandCarros/obj/Debug/net8.0/StandCarros.sourcelink.json

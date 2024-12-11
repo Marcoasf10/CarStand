@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StandCarros.Data;
-using StandCarros.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<StandCarrosContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("StandCarrosContext") ?? throw new InvalidOperationException("Connection string 'StandCarrosContext' not found.")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("StandCarrosContext") ?? throw new InvalidOperationException("Connection string 'StandCarrosContext' not found.")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<StandCarrosContext>()

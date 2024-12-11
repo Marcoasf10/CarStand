@@ -10,6 +10,8 @@ public class Photo
     public byte[] Bytes { get; set; }  
     public string Description { get; set; }  
     public string FileExtension { get; set; }  
+    
+    [Column(TypeName = "decimal(18, 2)")]
     public decimal Size { get; set; }  
     [ForeignKey("CarId")]
     public virtual Car Car { get; set; }  

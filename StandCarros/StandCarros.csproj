@@ -9,7 +9,11 @@
     <PropertyGroup>
         <OutputPath>$(SolutionDir)bin\Release\net8.0\</OutputPath>
     </PropertyGroup>
-    
+
+    <PropertyGroup>
+        <InvariantGlobalization>true</InvariantGlobalization>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="13.10.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />

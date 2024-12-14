@@ -4,6 +4,9 @@ using StandCarros.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+builder.WebHost.UseUrls($"http://*:{port}");
+
 builder.Services.AddDbContext<StandCarrosContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("StandCarrosContext") ?? throw new InvalidOperationException("Connection string 'StandCarrosContext' not found.")));
 
@@ -32,7 +35,6 @@ if (app.Environment.IsDevelopment()) {
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 

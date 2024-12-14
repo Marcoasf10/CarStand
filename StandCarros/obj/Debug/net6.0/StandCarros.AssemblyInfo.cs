@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StandCarros")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d19ff3c461d9843f12ecbea2db2bd36da0794550")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d163f88658b096e64cd7383e0186be890736aeaa")]
 [assembly: System.Reflection.AssemblyProductAttribute("StandCarros")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StandCarros")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

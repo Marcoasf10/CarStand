@@ -1,0 +1,7 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "./StandCarros/Dockerfile"
+
+[deploy]
+startCommand = "./StandCarros"
+restartPolicyType = "always"

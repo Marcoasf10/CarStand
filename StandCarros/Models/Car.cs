@@ -15,7 +15,7 @@ public class Car
     public string Combustível { get; set; }
     [DataType(DataType.Date)]
     [Display(Name="Data de registo")]
-    public DateTime DataRegisto { get; set; }
+    public DateOnly DataRegisto { get; set; }
     [Display(Name="Quilómetros")]
     [DisplayFormat(DataFormatString = "{0:N0}")]
     public int Quilometros { get; set; }

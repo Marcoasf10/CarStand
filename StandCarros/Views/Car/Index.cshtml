@@ -82,6 +82,16 @@ ViewData["Title"] = "Início";
             </div>
         </form>
     </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="d-flex justify-content-center m-3">
+            <!-- Button for desktop -->
+            <a class="btn btn-primary btn-lg d-none d-md-inline-block" asp-action="Create">Adicionar</a>
+
+            <!-- Button for mobile -->
+            <a class="btn btn-primary d-inline-block d-md-none" asp-action="Create">Adicionar</a>
+        </div>
+    }
     <div class="container" style="margin-top: 7%" id ="filterMobile">
         <!-- Filter Button -->
         <button class="btn btn-light" type="button" id="toggleFilters">

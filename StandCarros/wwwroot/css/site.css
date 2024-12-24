@@ -199,10 +199,6 @@ html {
   border-radius: 10px;
 }
 
-#filterDesktop{
-  margin-bottom: 3%
-}
-
 #filterMobile{
   display: none;
 }
@@ -228,16 +224,17 @@ html {
     display: none !important;
   }
   
-  #fullscreen-carousel-indicators{
-    //Bottom
-  }
-  
   #filterDesktop{
     display: none;
   }
   
-  #filterMobile{
+  #filterMobile {
     display: block;
+    margin-top: 7%
+  }
+  
+  #filterMobile .col-md-4{
+    margin-top: 2%;
   }
 
   .carousel-slide-counter {
@@ -245,8 +242,8 @@ html {
   }
   #toggleFilters {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
     z-index: 1000;
     border-radius: 50%;
     width: 60px;
@@ -274,7 +271,7 @@ html {
 
   .filter-wrapper.open {
     width: 90%; /* Full width for the container */
-    height: calc(100vh - 155px);
+    height: calc(100dvh - 155px);
     bottom: 85px; /* Align to button */
     right: 5%;
     border: 1px solid #c1c1c1;

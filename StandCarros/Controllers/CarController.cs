@@ -152,7 +152,7 @@ namespace StandCarros.Controllers
                 Car newCar = new()  
                 {  
                     Name = car.Name,
-                    Marca = car.Marca,
+                    Marca = car.Marca.ToLower(),
                     Modelo = car.Modelo,
                     Combustível = car.Combustível,
                     DataRegisto = car.DataRegisto,
@@ -314,7 +314,7 @@ namespace StandCarros.Controllers
                     // Update existing car properties
                     oldCar.Name = car.Name;
                     oldCar.Preco = car.Preco;
-                    oldCar.Marca = car.Marca;
+                    oldCar.Marca = car.Marca.ToLower();
                     oldCar.Modelo = car.Modelo;
                     oldCar.Combustível = car.Combustível;
                     oldCar.DataRegisto = car.DataRegisto;

@@ -22,7 +22,7 @@ ViewData["Title"] = "Details";
 
             @if (Model.Photos.Any())
             {
-            <div id="carousel-@Model.Id" class="carousel slide custom-carousel details-carousel" data-bs-ride="carousel">
+            <div id="carousel-@Model.Id" class="carousel slide custom-carousel details-carousel" data-bs-ride="carousel" style="overflow: hidden;">
                 <div class="carousel-inner">
                     @for (var i = 0; i < Model.Photos.Count; i++)
                     {
@@ -48,18 +48,18 @@ ViewData["Title"] = "Details";
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
-                }
                 <div id="carousel-indicators" class="carousel-indicators" style="bottom: 80px;">
                     @for (int i = 0; i < Model.Photos.Count(); i++)
                     {
-                    var photo = Model.Photos[i];
-                    <button type="button" data-bs-target="#carousel-@Model.Id" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "") thumbnail">
-                        <div class="indicator-img-wrapper">
-                            <img src="data:image/@photo.FileExtension;base64,@Convert.ToBase64String(photo.Bytes)" alt="@photo.Description" class="indicator-img">
-                        </div>
-                    </button>
+                        var photo = Model.Photos[i];
+                        <button type="button" data-bs-target="#carousel-@Model.Id" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "") thumbnail">
+                            <div class="indicator-img-wrapper">
+                                <img src="data:image/@photo.FileExtension;base64,@Convert.ToBase64String(photo.Bytes)" alt="@photo.Description" class="indicator-img">
+                            </div>
+                        </button>
                     }
                 </div>
+                }
             </div>
             <div id="fullscreen-carousel-@Model.Id" class="carousel slide custom-carousel fullscreen-carousel" data-bs-ride="carousel" style="display: none">
                 <div class="carousel-inner">

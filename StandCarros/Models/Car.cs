@@ -10,7 +10,16 @@ public class Car
     public int Id { get; set; }
     [Display(Name="Nome")]
     public string Name { get; set; }
-    public string Marca { get; set; }
+    //public string Marca { get; set; }
+    
+    private string _marca;
+    public string Marca
+    {
+        get => _marca;
+        set => _marca = string.IsNullOrWhiteSpace(value) 
+            ? value 
+            : char.ToUpper(value[0]) + value.Substring(1).ToLower();
+    }
     public string Modelo { get; set; }
     public string Combustível { get; set; }
     [DataType(DataType.Date)]

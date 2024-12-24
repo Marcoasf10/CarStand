@@ -92,7 +92,7 @@ ViewData["Title"] = "Início";
             <a class="btn btn-primary d-inline-block d-md-none" asp-action="Create">Adicionar</a>
         </div>
     }
-    <div class="container" style="margin-top: 7%" id ="filterMobile">
+    <div class="container" id ="filterMobile">
         <!-- Filter Button -->
         <button class="btn btn-light" type="button" id="toggleFilters">
             <img src="~/icons/filters_icon.png" alt="filters_icon" class="selected-icon"/>
@@ -302,5 +302,6 @@ ViewData["Title"] = "Início";
         }
         filterWrapper.classList.toggle('open');
     });
-</script>
+    
+    </script>
 }

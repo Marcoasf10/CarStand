@@ -78,8 +78,8 @@ static async Task SeedData(IServiceProvider serviceProvider)
     }
 
     // Create a default admin user
-    string adminEmail = "marco10ferreira18@gmail.com";
-    string adminPassword = "AdminPassword123!";
+    var adminEmail = "natal2024";
+    var adminPassword = "AdminPassword123!";
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
     if (adminUser == null)
     {

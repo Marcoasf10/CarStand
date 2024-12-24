@@ -303,4 +303,7 @@ html {
   .fullscreen-carousel.custom-carousel .carousel-inner{
     border-radius: 0 !important;
   }
+  #description{
+    margin: 12px 0 12px 
+  }
 }

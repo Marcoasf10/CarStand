@@ -78,12 +78,12 @@ static async Task SeedData(IServiceProvider serviceProvider)
     }
 
     // Create a default admin user
-    var adminEmail = "natal2024";
+    var adminUsername = "natal2024";
     var adminPassword = "AdminPassword123!";
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
+    var adminUser = await userManager.FindByNameAsync(adminUsername);
     if (adminUser == null)
     {
-        var newAdmin = new IdentityUser { Email = adminEmail, UserName = adminEmail };
+        var newAdmin = new IdentityUser { UserName = adminUsername };
         var result = await userManager.CreateAsync(newAdmin, adminPassword);
         if (result.Succeeded)
         {

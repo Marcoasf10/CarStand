@@ -21,5 +21,4 @@ To deploy the app, I used **Docker** for containerization. Docker helps to packa
 ensuring that it runs consistently across different environments. 
 The application was configured with a `Dockerfile` to set up the necessary environment and dependencies, and was then deployed on Railway's platform.
 
-The app is now available and can be accessed at **https://carlosmassano.up.railway.app/**.
-
+The app used to be available at **https://carlosmassano.up.railway.app/** but unfortunately the free trial expired.
